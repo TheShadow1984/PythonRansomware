@@ -17,6 +17,7 @@ def blue_screen():
     root.attributes("-fullscreen", True)
     root.attributes("-topmost", True)
     root.overrideredirect(True)
+    root.config(cursor='none')
 
 # Bildschirmgröße
     screen_width = root.winfo_screenwidth()
