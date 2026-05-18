@@ -4,8 +4,11 @@ from ctypes import c_uint
 from ctypes import c_ulong
 from ctypes import POINTER
 from ctypes import byref
+import ctypes
+import os
 import time
 import subprocess
+import random
 
 def trigger_bsod():
 
@@ -27,31 +30,18 @@ def trigger_bsod():
         byref(c_uint())
     )
 
-print("windll.exe ntdll.RtlAdjustPrivilege")
-time.sleep(0.1)
-print("windll.exe ntdll.NtRaiseHardError")
-time.sleep(0.1)
-print("task kernel32.getProsess.System32.runtime")
-print(" process (0xC000007B)")
-time.sleep(0.1)
-print("windll.exe run 0xC000007B")
-time.sleep(0.6)
-print(" system32.runtime error code: 0x00000000")
-print(" system32.runtime.restarting")
-time.sleep(0.2)
-print(" system32.runtime error code: 0x00000000")
-print(" system32.runtime.restarting")
-time.sleep(0.1)
-print(" system32.runtime error code: 0x00000000")
-print(" system32.runtime enter safe mode")
-time.sleep(0.3)
-print("kernel32.setSystemPowerState.safeMode")
-print(" Success")
+subprocess.Popen("MdSched.exe", shell=True)
+time.sleep(1)
 
-import subprocess
-import time
+ctypes.windll.user32.MessageBoxW(
+    0,
+    "System runtime (WinDLL) has encountered a critical error.",
+    "Error 0xC000007B",
+    0x10
+)
+time.sleep(1)
 
-for i in range(4):
+for i in range(5):
+    time.sleep(random.uniform(0.2,0.7))
     subprocess.Popen("start cmd /c exit", shell=True)
-
-trigger_bsod()
+#trigger_bsod()
