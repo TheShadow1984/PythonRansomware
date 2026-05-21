@@ -58,4 +58,8 @@ def decrypt():
             continue
 
 if __name__ == "__main__":
-    break
+    func = input("Decrypt or Encrypt? (1/2): ")
+    if func == 1:
+        decrypt()
+    else:
+        encrypt()
